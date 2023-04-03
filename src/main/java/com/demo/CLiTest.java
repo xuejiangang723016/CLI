@@ -470,7 +470,6 @@ public class CLiTest {
 
     /**
      * 解析top 等的输出信息 格式如：
-     * @param data
      * @return
      */
     @Test
