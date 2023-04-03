@@ -486,7 +486,7 @@ public class CLiTest {
 
         String[] split = data.split("\\s");
         for(String s:split){
-
+            System.out.println(s);
         }
 
     }

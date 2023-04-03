@@ -1,0 +1,5 @@
+/target/
+log/*
+css/*.css
+.idea
+.gitignore
