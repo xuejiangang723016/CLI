@@ -351,9 +351,9 @@ public class CLiTest {
     @Test
     public void reduce() {
         Map<String, String> map = new HashMap<>();
-        String data = topHelpText;
+      //  String data = topHelpText;
         //   String data = freeHelpText;
-     //   String data = tcpDump;
+        String data = tcpDump;
        //    String data = netStatHelpText;
       //  String data = pingHelpText;
         //按行获取数据
@@ -423,6 +423,7 @@ public class CLiTest {
                     String data1 = matcher1.group(1);
                     String[] s = data1.split(" ");
                     int num = s.length;
+                    System.out.println("str lenth:"+data1 +"lenth:"+num);
                     if (num == 3) {
                         map.put(s[1], s[2]);
                     } else if (num == 2) {
@@ -430,7 +431,9 @@ public class CLiTest {
                         if (specSymbolNum == 1) {
                             map.put(s[0], s[1]);
                         } else {
-                            map.put(s[1], null);
+                            if(data1.contains("-")){
+                                map.put(s[1], null);
+                            }
                         }
                     } else {
                         if (data1.contains("-")) {
