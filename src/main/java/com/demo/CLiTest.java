@@ -1,11 +1,12 @@
 package com.demo;
 
 import com.sun.corba.se.impl.encoding.CDROutputObject;
+import jdk.nashorn.internal.ir.CallNode;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -351,59 +352,64 @@ public class CLiTest {
     @Test
     public void reduce() {
         Map<String, String> map = new HashMap<>();
-      //  String data = topHelpText;
+        String data = com.demo.data.d3;
+        // String data = topHelpText;
         //   String data = freeHelpText;
-        String data = tcpDump;
-       //    String data = netStatHelpText;
-      //  String data = pingHelpText;
+        // String data = tcpDump;
+        //    String data = netStatHelpText;
+        //  String data = pingHelpText;
         //按行获取数据
         String[] split = data.split("\\n");
-        for (String sp : split) {
-            //提取含有[]的字符
-            String regex = "\\[.*?]*\\]";
-            Pattern compile = Pattern.compile(regex);
-            Matcher matcher = compile.matcher(sp);
-            while (matcher.find()) {
-                String data1 = matcher.group();
-                Map<String, String> stringStringMap = pares01(data1);
-                map.putAll(stringStringMap);
-            }
-            //提取含有{}的字符
-            String regex1 = "\\{.*?]*\\}";
-            Pattern compile1 = Pattern.compile(regex1);
-            Matcher matcher1 = compile1.matcher(sp);
-            while (matcher1.find()) {
-                String data1 = matcher1.group();
-                Map<String, String> stringStringMap = parse02(data1);
-                map.putAll(stringStringMap);
-            }
-            //提取所有以-开头的字符
-            String regex2 = "\\-\\w+\\,";
-            Pattern compile2 = Pattern.compile(regex2);
-            Matcher matcher2 = compile2.matcher(sp);
-            while(matcher2.find()){
-                String data3 = matcher2.group();
-                System.out.println(data3);
-                String data4 = data3.replace(",","");
-                map.put(data4, null);
-            }
-            //提取含有以-开头的包含参数的字符
-            String regex3 = "\\-\\w\\s\\w+\\,";
-            Pattern compile3 = Pattern.compile(regex3);
-            Matcher matcher3 = compile3.matcher(sp);
-            while(matcher3.find()){
-                String data4 = matcher3.group();
-                System.out.println(data4);
-                String[] split1 = data4.split("\\s");
-                map.put(split1[0], split1[1]);
+        if (split.length <= 3) {
+            map.putAll(parse03(data));
+        } else {
+            for (String sp : split) {
+                //提取含有[]的字符
+                String regex = "\\[.*?]*\\]";
+                Pattern compile = Pattern.compile(regex);
+                Matcher matcher = compile.matcher(sp);
+                while (matcher.find()) {
+                    String data1 = matcher.group();
+                    Map<String, String> stringStringMap = pares01(data1);
+                    map.putAll(stringStringMap);
+                }
+                //提取含有{}的字符
+                String regex1 = "\\{.*?]*\\}";
+                Pattern compile1 = Pattern.compile(regex1);
+                Matcher matcher1 = compile1.matcher(sp);
+                while (matcher1.find()) {
+                    String data1 = matcher1.group();
+                    Map<String, String> stringStringMap = parse02(data1);
+                    map.putAll(stringStringMap);
+                }
+                //提取所有以-开头的字符
+                String regex2 = "\\-\\w+\\,";
+                Pattern compile2 = Pattern.compile(regex2);
+                Matcher matcher2 = compile2.matcher(sp);
+                while (matcher2.find()) {
+                    String data3 = matcher2.group();
+                    System.out.println(data3);
+                    String data4 = data3.replace(",", "");
+                    map.put(data4, null);
+                }
+                //提取含有以-开头的包含参数的字符
+                String regex3 = "\\-\\w\\s\\w+\\,";
+                Pattern compile3 = Pattern.compile(regex3);
+                Matcher matcher3 = compile3.matcher(sp);
+                while (matcher3.find()) {
+                    String data4 = matcher3.group();
+                    System.out.println(data4);
+                    String[] split1 = data4.split("\\s");
+                    map.put(split1[0], split1[1]);
+                }
             }
         }
-        System.out.println(map.size());
         map.entrySet().stream().forEach(entry -> {
             System.out.println("option cmd:" + entry.getKey() + " option param:" + entry.getValue());
         });
 
     }
+
     /**
      * 解析[]中可选命令
      *
@@ -413,41 +419,36 @@ public class CLiTest {
     public static Map<String, String> pares01(String data) {
         System.out.println(data);
         Map<String, String> map = new HashMap<String, String>();
-        if(!data.equals("[options]")) {
+        if (!data.equals("[options]")) {
             //提取[]中内容
-            if (!data.contains("<") && !data.contains(">")) {
-                String regex1 = "\\[(.*?)\\]";
-                Pattern memory = Pattern.compile(regex1);
-                Matcher matcher1 = memory.matcher(data);
-                while (matcher1.find()) {
-                    String data1 = matcher1.group(1);
-                    String[] s = data1.split(" ");
+            String regex1 = "\\[(.*?)\\]";
+            Pattern memory = Pattern.compile(regex1);
+            Matcher matcher1 = memory.matcher(data);
+            while (matcher1.find()) {
+                String data1 = matcher1.group(1);
+                String d = data1.trim();
+                if (!d.matches(".*[<>\\[\\/].*")) {
+                    System.out.println(d);
+                    String[] s = d.split("\\s");
                     int num = s.length;
-                    System.out.println("str lenth:"+data1 +"lenth:"+num);
-                    if (num == 3) {
-                        map.put(s[1], s[2]);
-                    } else if (num == 2) {
-                        int specSymbolNum = getSpecSymbolNum(data1, '-');
-                        if (specSymbolNum == 1) {
-                            map.put(s[0], s[1]);
-                        } else {
-                            if(data1.contains("-")){
-                                map.put(s[1], null);
-                            }
-                        }
+                    System.out.println("str lenth:" + data1 + "lenth:" + num);
+                    if (num == 2) {
+                        map.put(s[0], s[1]);
                     } else {
-                        if (data1.contains("-")) {
-                            char[] chars = data1.replace("-", "").toCharArray();
+                        int specSymbolNum = getSpecSymbolNum(d, '-');
+                        if (specSymbolNum == 2) {
+                            map.put(s[0], null);
+                        } else if (specSymbolNum == 1) {
+                            char[] chars = data1.replace("-", "").trim().toCharArray();
                             for (char c : chars) {
                                 if (c != '#') {
                                     map.put("-" + c, null);
+                                    System.out.println("no args option:" + c);
                                 }
                             }
                         }
                     }
                 }
-            } else {
-                return map;
             }
         }
         return map;
@@ -456,13 +457,14 @@ public class CLiTest {
 
     /**
      * 解析{}中的内容
+     *
      * @param data
      * @return
      */
     public static Map<String, String> parse02(String data) {
         Map<String, String> map = new HashMap<>();
         String data2 = data.replace("{", "").replace("}", "");
-        if (data2.contains("|")&&!data2.contains("[")&&!data2.contains("]")) {
+        if (data2.contains("|") && !data2.contains("[") && !data2.contains("]")) {
             String[] split2 = data2.split("\\|");
             for (String s2 : split2) {
                 map.put(s2, null);
@@ -473,35 +475,132 @@ public class CLiTest {
 
     /**
      * 解析top 等的输出信息 格式如：
+     *
      * @return
      */
-    @Test
-    public  void parse03(){
-      //  Map<String, String> map = new HashMap<>();
-        String data = "top -hv | -bcHiOSs -d secs -n max -u|U user -p pid(s) -o field -w [cols]";
-//        String regex = "\\-\\w+\\s\\w+";
-//        Pattern compile = Pattern.compile(regex);
-//        Matcher matcher = compile.matcher(data);
-//        while(matcher.find()){
-//            System.out.println(matcher.group());
-//        }
+    public static Map<String, String> parse03(String data) {
+        Map<String, String> map = new HashMap<>();
+        //对数据按行进行分割
+        String[] split = data.split("\n");
+        //获取最后一行的内容
+        String s = split[split.length - 1];
+        //按照空格进行分割
+        String[] s1 = s.split(" ");
+        for (int i = 0; i < s1.length; i++) {
+            if (s1[i].contains("-") && !s1[i + 1].contains("-")) {//判断命令是否带参数
 
-        String[] split = data.split("\\s");
-        for(String s:split){
-            System.out.println(s);
+                if (s1[i].contains("\\|")) {
+
+                }
+                if (!s1[i + 1].equals("|")) {
+                    map.put(s1[i], s1[i + 1]);
+                } else {
+                    map.put(s1[i], null);
+                }
+            } else if (s1[i].contains("-") && s1[i + 1].contains("-")) {//解析无参命令
+                char[] s2 = s1[i].replace("-", "").toCharArray();
+                for (char c : s2) {
+                    map.put("-" + c, null);
+                }
+            }
         }
-
+        return map;
     }
 
-    public static int getSpecSymbolNum(String data,char c) {
-        int i =0;
+    public static int getSpecSymbolNum(String data, char c) {
+        int i = 0;
         char[] chars = data.toCharArray();
-        for(char c1: chars){
-            if(c1 == c){
+        for (char c1 : chars) {
+            if (c1 == c) {
                 i++;
             }
         }
         return i;
+    }
+
+    @Test
+    public void getDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(simpleDateFormat.format(new Date()));
+    }
+
+
+    @Test
+    public void test01() throws IOException {
+        Process process = Runtime.getRuntime().exec("ping --help");
+//        ProcessBuilder builder = new ProcessBuilder("ping --help");
+//        Process process = builder.start();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        List<String> options = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.startsWith("  -") || line.startsWith("\t-")) {
+                String[] tokens = line.trim().split("\\s+");
+                for (String token : tokens) {
+                    if (token.startsWith("-")) {
+                        options.add(token);
+                    }
+                }
+            }
+        }
+        options.stream().forEach(System.out::println);
+
+    }
+
+    @Test
+    public void test123() {
+//        String str1 = "a";
+//        String str2 = "-";
+//        String str3 = "b-";
+//        String str4 = "-c";
+//        String str5 = "x-y";
+//
+//        boolean isMatch1 = str1.matches("[a-zA-Z]");
+//        boolean isMatch2 = str2.matches("[a-zA-Z-]");
+//        boolean isMatch3 = str3.matches("[a-zA-Z-]+");
+//        boolean isMatch4 = str4.matches("[a-zA-Z-]+");
+//        boolean isMatch5 = str5.matches("[a-zA-Z-]+");
+//
+//        System.out.println(str1 + ": " + isMatch1);
+//        System.out.println(str2 + ": " + isMatch2);
+//        System.out.println(str3 + ": " + isMatch3);
+//        System.out.println(str4 + ": " + isMatch4);
+//        System.out.println(str5 + ": " + isMatch5);
+//        String[] a1 = new String[]{"de", "ry", "yu", "io"};
+//        System.out.println(a1[a1.length - 1]);
+//        String data = "-/";
+//
+//        System.out.println( data.matches(".*[<>\\[\\/].*"));
+//        String regex = "\\[\\[\\/\\<\\>\\]";
+//        Pattern compile = Pattern.compile(regex);
+//        Matcher matcher = compile.matcher(data);
+//        System.out.println(matcher.find());
+
+        System.out.println("-hello".length());
+        String d3 = data.d3;
+        String[] split = d3.split("\n");
+        int i = 0;
+        Map<String,String> list = new HashMap<>();
+        for (String s : split) {
+            String[] split1 = s.split("\\s");
+            for (String s1 : split1) {
+                if (s1.startsWith("-")) {
+                    if (s1.contains(",")) {
+                        String[] split2 = s1.split(",");
+                        for (String s2 : split2) {
+                            list.put(s2, null);
+                        }
+                    }else{
+                        if(!s1.equals("--")) {
+                            list.put(s1, null);
+                        }
+                    }
+                }
+            }
+        }
+        list.entrySet().stream().forEach(entry ->{
+            System.out.println(entry.getKey()+"<==>"+entry.getValue());
+        });
     }
 }
 
