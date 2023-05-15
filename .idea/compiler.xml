@@ -2,12 +2,53 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CLI" />
+        <module name="netsign-caviumcheck" />
+        <module name="netsign-dao" />
+        <module name="netsign-opsmanager" />
+        <module name="netsign-common" />
+        <module name="netsign" />
+        <module name="shcpe-agent" />
+        <module name="netsign-perf" />
+        <module name="netsign-basic" />
+        <module name="netsign-entity" />
+        <module name="cncc-bbms" />
+        <module name="NSSWeb" />
+        <module name="webui" />
+        <module name="server-test" />
+        <module name="agent-test" />
+        <module name="netsign-agent" />
+        <module name="netsign-selftest" />
+        <module name="socket" />
+        <module name="netsign-monitor" />
+        <module name="netsign-keystore" />
+        <module name="netsign-crypto" />
+        <module name="parseJws" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="NSSWeb" options="-extdirs lib" />
+      <module name="netsign" options="-extdirs lib" />
+      <module name="netsign-basic" options="-extdirs lib" />
+      <module name="netsign-caviumcheck" options="-extdirs lib" />
+      <module name="netsign-common" options="-extdirs lib" />
+      <module name="netsign-crypto" options="-extdirs lib" />
+      <module name="netsign-dao" options="-extdirs lib" />
+      <module name="netsign-entity" options="-extdirs lib" />
+      <module name="netsign-keystore" options="-extdirs lib" />
+      <module name="netsign-monitor" options="-extdirs lib" />
+      <module name="netsign-opsmanager" options="-extdirs lib" />
+      <module name="netsign-selftest" options="-extdirs lib" />
+      <module name="netsign-server" options="-extdirs lib" />
+      <module name="socket" options="" />
+      <module name="webui" options="-extdirs lib" />
+    </option>
   </component>
 </project>

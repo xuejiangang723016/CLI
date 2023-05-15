@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../base-project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../netsign-agent-java" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../netsign-server-project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../parseJws" vcs="Git" />
   </component>
 </project>

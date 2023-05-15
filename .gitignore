@@ -1,5 +1,10 @@
 /target/
 log/*
 css/*.css
-.idea
+.idea/*
 .gitignore
+/.idea/
+/node_modules/
+/package-lock.json
+/package.json
+/test.xml

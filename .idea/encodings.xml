@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
-    <file url="file://$USER_HOME$/Documents/crlLogView.sh" charset="GBK" />
-    <file url="file://$USER_HOME$/Documents/portstatus.sh" charset="GBK" />
+  <component name="Encoding" defaultCharsetForPropertiesFiles="GBK">
+    <file url="file://$PROJECT_DIR$/src/main/free.sh" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/demo/commandHelp.sh" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/demo/getInfo.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/netstat.sh" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/ping.sh" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/demsg.sh" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/find.sh" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/ifconfig.sh" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/route.sh" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/top.sh" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/tcpdump.sh" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../base-project/reousrce/js/enc.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../netsign-agent-java/agent-test/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-agent-java/agent-test/src/main/resources" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-agent-java/cncc-bbms/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-agent-java/netsign-agent/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-agent-java/netsign-perf/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-agent-java/netsign-perf/src/main/resources" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-agent-java/shcpe-agent/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/5.5.40.12/crypto/src/main/java/cn/com/infosec/oscca/SDFJNI.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/5.5.40.12/nslicence/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/5.5.40.12/nsserver/src/main/java/cn/com/infosec/netsign/base/jsonweb/JwsAlgorithmEnum.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/5.5.40.12/nsserver/src/main/java/cn/com/infosec/netsign/base/processors/json/MakeJWEDataProcessor.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/5.5.40.12/nsserver/src/main/resources" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/NSSWeb/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-basic/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-caviumcheck/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-common/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-common/src/main/resources" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-crypto/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-dao/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-entity/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-keystore/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-keystore/src/main/resources" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-monitor/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-opsmanager/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-selftest/src/main/java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../netsign-server-project/netsign-selftest/src/main/resources" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../parseJws/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../parseJws/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../socket/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../socket/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="GBK" />
   </component>
 </project>
